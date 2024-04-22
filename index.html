@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <!-- We only include this to explicitly loosen the CSP of various packager environments. It does not provide any security. -->
   <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: blob:">
-  <title>Mini War v1.1</title>
+  <title>Mini War</title>
   <style>
     body {
       color: #ffffff;
@@ -111,10 +111,10 @@
       border-radius: 4px;
     }
     .control-button:hover {
-      background: #e274d326;
+      background: #cf75ff26;
     }
     .control-button.active {
-      background: #e274d359;
+      background: #cf75ff59;
     }
     .fullscreen-button {
       background: white !important;
@@ -132,13 +132,13 @@
       cursor: auto;
     }
     .sc-monitor-root[data-opcode^="data_"] .sc-monitor-value-color {
-      background-color: #9e9e9e;
+      background-color: #949494;
     }
     .sc-monitor-row-value-outer {
-      background-color: #383838;
+      background-color: #333333;
     }
     .sc-monitor-row-value-editing .sc-monitor-row-value-outer {
-      background-color: #1e1e1e;
+      background-color: #191919;
     }
     
   </style>
@@ -160,7 +160,7 @@
 
   <div id="loading" class="screen">
     <noscript>Enable JavaScript</noscript>
-    
+    <h1 class="loading-text">Loading</h1>
     
     <div class="progress-bar-outer"><div class="progress-bar-inner" id="loading-inner"></div></div>
   </div>
@@ -221,10 +221,10 @@
       };
 
       scaffolding.setUsername("player####".replace(/#/g, () => Math.floor(Math.random() * 10)));
-      scaffolding.setAccentColor("#e274d3");
+      scaffolding.setAccentColor("#cf75ff");
 
       try {
-        scaffolding.addCloudProvider(new Scaffolding.Cloud.WebSocketProvider(["wss://clouddata.turbowarp.org","wss://clouddata.turbowarp.xyz"], "25994002"));
+        scaffolding.addCloudProvider(new Scaffolding.Cloud.WebSocketProvider(["wss://clouddata.turbowarp.org","wss://clouddata.turbowarp.xyz"], "p4-@Mini War v1.1.0 remix-2.sb3"));
       } catch (error) {
         console.error(error);
       }
@@ -266,7 +266,7 @@
       const getProjectData = (function() {
         const storage = scaffolding.storage;
         storage.onprogress = (total, loaded) => {
-          setProgress(interpolate(0.75, 0.98, loaded / total));
+          setProgress(interpolate(0.2, 0.98, loaded / total));
         };
         
         storage.addWebStore(
@@ -292,11 +292,11 @@
         };
         xhr.onprogress = (e) => {
           if (e.lengthComputable) {
-            setProgress(interpolate(0.1, 0.75, e.loaded / e.total));
+            setProgress(interpolate(0.1, 0.2, e.loaded / e.total));
           }
         };
         xhr.responseType = 'arraybuffer';
-        xhr.open('GET', "./project.zip");
+        xhr.open('GET', "./assets/project.json");
         xhr.send();
       });
       })();
